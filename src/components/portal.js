@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import wormhole from './wormhole'
 import Target from './portal-target'
 import { extractAttributes } from '../utils'

@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { combinePassengers, freeze } from '../utils'
 const transports = {}
 

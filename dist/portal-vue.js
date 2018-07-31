@@ -6,12 +6,10 @@
   */
   
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('vue')) :
-	typeof define === 'function' && define.amd ? define(['vue'], factory) :
-	(global.PortalVue = factory(global.Vue));
-}(this, (function (Vue) { 'use strict';
-
-Vue = Vue && 'default' in Vue ? Vue['default'] : Vue;
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.PortalVue = factory());
+}(this, (function () { 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
@@ -581,11 +579,17 @@ var Portal = {
   }
 };
 
-function install(Vue$$1) {
+function install(Vue) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  Vue$$1.component(opts.portalName || 'portal', Portal);
-  Vue$$1.component(opts.portalTargetName || 'portalTarget', Target);
+  if (this.installed) {
+    return;
+  }
+
+  this.installed = true;
+
+  Vue.component(opts.portalName || 'portal', Portal);
+  Vue.component(opts.portalTargetName || 'portalTarget', Target);
 }
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use({ install: install });
